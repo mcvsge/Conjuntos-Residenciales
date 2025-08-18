@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>247 Seguridad del Ecuador</title>
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="img/logo24-7.png" />    
+    <!-- Google Fonts -->
+    <link 
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <!-- Bootstrap CSS -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <!-- Font Awesome -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/styles.css" />
+  </head>
+  <body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark">
+      <div class="container">
+        <a class="navbar-brand" href="#">
+          <img src="img/logo24-7.png" alt="Logo 247 Seguridad" class="logo" />
+          <span><span class="text-gold">247</span> Seguridad Ecuador</span>
+        </a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarNav"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav ms-auto">
+            <li class="nav-item">
+              <a class="nav-link" href="index.html">Inicio</a>
+            </li>
+            <li class="nav-item" id="adminMenuItem">
+              <a class="nav-link active" href="admin.html"
+                >Panel de Administrador</a
+              >
+            </li>
+            <li class="nav-item" id="logoutBtn">
+              <a class="nav-link" href="#">
+                <i class="fas fa-sign-out-alt"></i> Cerrar Sesión
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Main Content -->
+    <section class="main-section">
+      <div class="container">
+        <div class="row mb-4 align-items-center">
+          <div class="col-md-8">
+            <h1 id="title">Panel de Administrador</h1>
+            <p class="lead">
+              Gestione los conjuntos residenciales y sus residentes.
+            </p>
+          </div>
+          <div class="col-md-4 text-end">
+            <button
+            class="btn btn-gold"
+            data-bs-toggle="modal"
+            data-bs-target="#conjuntoModal"
+          >
+            <i class="fas fa-plus"></i> Crear Nuevo Conjunto
+          </button>
+          </div>
+        </div>
+
+        <!-- Conjuntos Cards Container -->
+        <div id="conjuntosContainer" class="row">
+          <!-- Las cards de conjuntos se cargarán dinámicamente aquí -->
+          <div class="col-12 text-center" id="noConjuntosMessage">
+            <p>
+              No hay conjuntos disponibles. Cree un nuevo conjunto para
+              comenzar.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Crear Conjunto Modal -->
+    <div class="modal fade" id="conjuntoModal" tabindex="-1" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Crear Nuevo Conjunto</h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body">
+            <form id="conjuntoForm">
+              <div class="mb-3">
+                <label for="nombreConjunto" class="form-label"
+                  >Nombre del Conjunto</label
+                >
+                <input
+                  type="text"
+                  class="form-control"
+                  id="nombreConjunto"
+                  required
+                />
+              </div>
+              <div class="mb-3">
+                <label for="direccionConjunto" class="form-label"
+                  >Dirección</label
+                >
+                <input
+                  type="text"
+                  class="form-control"
+                  id="direccionConjunto"
+                  required
+                />
+              </div>
+              <div class="mb-3">
+                <label for="descripcionConjunto" class="form-label"
+                  >Descripción</label
+                >
+                <textarea
+                  class="form-control"
+                  id="descripcionConjunto"
+                  rows="1"
+                ></textarea>
+              </div>
+              <div class="d-grid">
+                <button type="submit" class="btn btn-primary">
+                  Guardar Conjunto
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Tabla de Residentes Modal -->
+    <div
+      class="modal fade"
+      id="residentesModal"
+      tabindex="-1"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-xl">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="residentesModalTitle">
+              Residentes del Conjunto
+            </h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body">
+            <div class="table-responsive">
+              <table class="table table-striped">
+                <thead>
+                  <tr>
+                    <th>Nombres</th>
+                    <th>Apellidos</th>
+                    <th>Departamento</th>
+                    <th>Tipo</th>
+                    <th>Contacto</th>
+                    <th>Vehículos</th>
+                    <th>Acciones</th>
+                  </tr>
+                </thead>
+                <tbody id="residentesTableBody">
+                  <!-- Aquí se cargarán dinámicamente los residentes -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+         <!-- Footer Moderno y Minimalista -->
+    <footer class="footer fixed-bottom">
+      <div class="container py-2">
+        <div class="row align-items-center">
+          <div class="col-12">
+            <div class="d-flex flex-column flex-lg-row align-items-center justify-content-between gap-2">
+              
+              <!-- Logo y nombre -->
+              <div class="d-flex align-items-center gap-2">
+                <img src="img/logo24-7.png" alt="Logo 247 Seguridad" class="footer-logo" style="width: 40px"/>
+                <span class="company-name">247 Seguridad Ecuador</span>
+              </div>
+        
+              <!-- Contacto -->
+              <div class="contact-info text-center text-lg-center">
+                <span><i class="fas fa-phone me-1"></i>(02) 123-4567</span>
+                <span class="mx-2">|</span>
+                <span><i class="fas fa-envelope me-1"></i>info@247seguridad.com</span>
+              </div>
+        
+              <!-- Copyright -->
+              <div class="copyright text-center text-lg-end">
+                &copy; 2024 <b>MCV</b>
+              </div>
+        
+            </div>
+          </div>
+        </div>
+        
+      </div>
+    </footer>
+
+    <!-- Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Firebase -->
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
+    <!-- SweetAlert2 -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <!-- Custom JS -->
+    <script src="js/firebase-config.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/admin.js"></script>
+  </body>
+</html>
