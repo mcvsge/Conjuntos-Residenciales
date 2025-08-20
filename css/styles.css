@@ -696,6 +696,19 @@ p,
     pointer-events: auto;
 }
 
+#sesion{
+    width: 80%;
+    max-height: 90vh;
+    overflow-y: auto;
+    pointer-events: auto;
+}
+
+#conjunto{
+    width: 90%;
+    max-height: 90vh;
+    overflow-y: auto;
+    pointer-events: auto;
+}
 /* Asegurar que el backdrop no bloquee la interacción con el modal */
 .modal-backdrop {
     z-index: 1040;
