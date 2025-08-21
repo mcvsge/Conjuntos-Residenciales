@@ -224,7 +224,7 @@ agregarVehiculoBtn.addEventListener('click', function(e) {
         });
     }
 }, { passive: false }); // Usar passive: false para mejor control del evento
-});
+// This closing bracket appears to be orphaned and should be removed
 
 // Función para renumerar los vehículos
 function renumerarVehiculos() {
