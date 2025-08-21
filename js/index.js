@@ -168,11 +168,19 @@ function mostrarTablaResidentes(conjuntoId, conjuntoNombre) {
 // Agregar vehículo al formulario
 agregarVehiculoBtn.addEventListener('click', () => {
     const vehiculoId = Date.now(); // ID único para el vehículo
+    
+    // Contar cuántos vehículos hay actualmente para asignar el número
+    const vehiculosActuales = document.querySelectorAll('.vehiculo-container').length;
+    const numeroVehiculo = vehiculosActuales + 1;
+    
     const vehiculoHTML = `
         <div class="vehiculo-container" id="vehiculo-${vehiculoId}">
-            <span class="remove-vehiculo" data-id="${vehiculoId}">
-                <i class="fas fa-times-circle"></i>
-            </span>
+            <div class="d-flex justify-content-between align-items-center mb-2">
+                <h5 class="mb-0">Vehículo ${numeroVehiculo}</h5>
+                <button type="button" class="btn btn-danger btn-sm remove-vehiculo" data-id="${vehiculoId}">
+                    <i class="fas fa-trash"></i> Eliminar
+                </button>
+            </div>
             <div class="row mb-2">
                 <div class="col-md-6">
                     <label class="form-label">Marca</label>
@@ -193,6 +201,7 @@ agregarVehiculoBtn.addEventListener('click', () => {
                     <input type="text" class="form-control" name="placa-${vehiculoId}" required>
                 </div>
             </div>
+            <hr class="my-3">
         </div>
     `;
     
@@ -202,8 +211,21 @@ agregarVehiculoBtn.addEventListener('click', () => {
     const removeBtn = document.querySelector(`.remove-vehiculo[data-id="${vehiculoId}"]`);
     removeBtn.addEventListener('click', () => {
         document.getElementById(`vehiculo-${vehiculoId}`).remove();
+        // Renumerar los vehículos después de eliminar uno
+        renumerarVehiculos();
     });
 });
+
+// Función para renumerar los vehículos
+function renumerarVehiculos() {
+    const vehiculos = document.querySelectorAll('.vehiculo-container');
+    vehiculos.forEach((vehiculo, index) => {
+        const titulo = vehiculo.querySelector('h5');
+        if (titulo) {
+            titulo.textContent = `Vehículo ${index + 1}`;
+        }
+    });
+}
 
 // Enviar formulario de residente
 residenteForm.addEventListener('submit', e => {

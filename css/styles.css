@@ -674,44 +674,12 @@ p,
 }
 
 /* Modales responsivos */
-/* Estilos para centrar todos los modales y permitir interacción */
-.modal {
-    z-index: 1050;
-    pointer-events: auto;
-}
-
-.modal-dialog {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    min-height: calc(60% - 1rem);
-    margin: 1.75rem auto;
-    pointer-events: auto;
-}
-
+/* Ajustes para modales responsivos */
 .modal-content {
-    width: 50%;
+    width: 100%; /* Cambiado de 50% a 100% para dispositivos móviles */
     max-height: 90vh;
     overflow-y: auto;
     pointer-events: auto;
-}
-
-#sesion{
-    width: 80%;
-    max-height: 90vh;
-    overflow-y: auto;
-    pointer-events: auto;
-}
-
-#conjunto{
-    width: 90%;
-    max-height: 90vh;
-    overflow-y: auto;
-    pointer-events: auto;
-}
-/* Asegurar que el backdrop no bloquee la interacción con el modal */
-.modal-backdrop {
-    z-index: 1040;
 }
 
 /* Ajustes específicos para diferentes tamaños de modal */
@@ -730,12 +698,67 @@ p,
         max-width: 95%;
         margin: 0.5rem auto;
     }
+    
+    #formularioModal .modal-dialog {
+        max-width: 95%;
+        margin: 0.5rem auto;
+    }
 }
 
 @media (max-width: 576px) {
     .modal-dialog {
         margin: 0.5rem;
         min-height: calc(100% - 1rem);
+        width: 95%;
+    }
+    
+    .modal-content {
+        width: 100%;
+    }
+    
+    #sesion, #conjunto {
+        width: 100%;
+    }
+    
+    /* Ajustes para formularios en móviles */
+    .row.mb-3 [class*='col-'] {
+        margin-bottom: 1rem;
+    }
+    
+    /* Ajuste para botones en móviles */
+    .btn {
+        width: 100%;
+        margin-bottom: 0.5rem;
+    }
+.eliminar-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 20px;
+    height: 30px;
+    border: none;
+    border-radius: 50%; /* Botón redondo */
+    background-color: #e63946; /* Rojo moderno */
+    color: white;
+    font-size: 15px; /* Tamaño del ícono */
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+}
+
+.eliminar-btn:hover {
+    background-color: #d62828; /* Rojo más oscuro */
+    transform: scale(1.1); /* Efecto al pasar el mouse */
+    box-shadow: 0 6px 14px rgba(0,0,0,0.3);
+}
+
+.eliminar-btn i {
+    pointer-events: none; /* Para que el ícono no bloquee el click */
+}
+
+    /* Ajuste para campos de formulario en móviles */
+    .form-control, .form-select {
+        font-size: 16px; /* Evita zoom en iOS */
     }
 }
 .modal-body {
@@ -866,4 +889,35 @@ img {
     background: rgba(249, 250, 251, 0.5);
     border-top: 1px solid rgba(3, 37, 65, 0.05);
     padding: 20px;
+}
+
+/* Estilos para los contenedores de vehículos */
+.vehiculo-container {
+    background-color: rgba(248, 249, 250, 0.7);
+    border-radius: 10px;
+    padding: 15px;
+    margin-bottom: 15px;
+    position: relative;
+}
+
+.vehiculo-container h5 {
+    color: var(--primary-color);
+    font-weight: 600;
+    font-size: 1.1rem;
+}
+
+.vehiculo-container hr {
+    border-color: rgba(3, 37, 65, 0.1);
+}
+
+/* Estilos para dispositivos móviles */
+@media (max-width: 576px) {
+    .vehiculo-container .d-flex {
+        flex-direction: column;
+        align-items: flex-start !important;
+    }
+    
+    .vehiculo-container .btn-sm {
+        margin-top: 8px;
+    }
 }

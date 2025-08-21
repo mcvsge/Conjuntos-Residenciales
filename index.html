@@ -174,7 +174,7 @@
       tabindex="-1"
       aria-hidden="true"
     >
-      <div class="modal-dialog modal-lg modal-dialog-centered">
+      <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
         <div class="modal-content">
           <div class="modal-header">
             <h5 class="modal-title">Registro de Residente</h5>
@@ -189,7 +189,7 @@
             <form id="residenteForm">
               <input type="hidden" id="conjuntoId" />
               <div class="row mb-3">
-                <div class="col-md-6">
+                <div class="col-12 col-md-6">
                   <label for="nombres" class="form-label">Nombres</label>
                   <input
                     type="text"
@@ -198,7 +198,7 @@
                     required
                   />
                 </div>
-                <div class="col-md-6">
+                <div class="col-12 col-md-6">
                   <label for="apellidos" class="form-label">Apellidos</label>
                   <input
                     type="text"
@@ -209,7 +209,7 @@
                 </div>
               </div>
               <div class="row mb-3">
-                <div class="col-md-6">
+                <div class="col-12 col-md-6">
                   <label for="departamento" class="form-label"
                     >Número de Departamento</label
                   >
@@ -220,7 +220,7 @@
                     required
                   />
                 </div>
-                <div class="col-md-6">
+                <div class="col-12 col-md-6">
                   <label for="tipoResidente" class="form-label"
                     >Tipo de Residente</label
                   >
@@ -241,7 +241,7 @@
               <!-- Vehículos -->
               <div class="mb-3">
                 <label class="form-label">Vehículos</label>
-                <div id="vehiculosContainer">
+                <div id="vehiculosContainer" class="mb-2">
                   <!-- Aquí se agregarán dinámicamente los campos de vehículos -->
                 </div>
                 <button
@@ -254,7 +254,7 @@
               </div>
 
               <div class="d-grid">
-                <button type="submit" class="btn btn-primary">
+                <button type="submit" class="btn btn-primary btn-lg">
                   Guardar Información
                 </button>
               </div>
