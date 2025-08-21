@@ -166,7 +166,10 @@ function mostrarTablaResidentes(conjuntoId, conjuntoNombre) {
 }
 
 // Agregar vehículo al formulario
-agregarVehiculoBtn.addEventListener('click', () => {
+agregarVehiculoBtn.addEventListener('click', function(e) {
+    // Prevenir comportamiento por defecto para evitar doble activación
+    e.preventDefault();
+    
     const vehiculoId = Date.now(); // ID único para el vehículo
     
     // Contar cuántos vehículos hay actualmente para asignar el número
@@ -207,13 +210,20 @@ agregarVehiculoBtn.addEventListener('click', () => {
     
     vehiculosContainer.insertAdjacentHTML('beforeend', vehiculoHTML);
     
-    // Agregar evento para eliminar vehículo
+    // Agregar evento para eliminar vehículo con respuesta táctil mejorada
     const removeBtn = document.querySelector(`.remove-vehiculo[data-id="${vehiculoId}"]`);
-    removeBtn.addEventListener('click', () => {
-        document.getElementById(`vehiculo-${vehiculoId}`).remove();
-        // Renumerar los vehículos después de eliminar uno
-        renumerarVehiculos();
-    });
+    if (removeBtn) {
+        // Usar evento click para compatibilidad con todos los dispositivos
+        removeBtn.addEventListener('click', function(e) {
+            e.preventDefault(); // Prevenir comportamiento por defecto
+            e.stopPropagation(); // Detener propagación del evento
+            
+            document.getElementById(`vehiculo-${vehiculoId}`).remove();
+            // Renumerar los vehículos después de eliminar uno
+            renumerarVehiculos();
+        });
+    }
+}, { passive: false }); // Usar passive: false para mejor control del evento
 });
 
 // Función para renumerar los vehículos
@@ -281,4 +291,30 @@ residenteForm.addEventListener('submit', e => {
             console.error('Error al guardar residente:', error);
             alert('Error al guardar la información. Por favor, intente nuevamente.');
         });
+});
+
+// Mejorar respuesta táctil en dispositivos móviles
+document.addEventListener('DOMContentLoaded', function() {
+    // Detectar si es dispositivo móvil
+    const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+    
+    if (isMobile) {
+        // Eliminar delay de 300ms en eventos táctiles
+        document.documentElement.style.touchAction = 'manipulation';
+        
+        // Mejorar respuesta de botones
+        const allButtons = document.querySelectorAll('.btn, button');
+        allButtons.forEach(button => {
+            // Usar touchstart para respuesta inmediata
+            button.addEventListener('touchstart', function(e) {
+                // Prevenir comportamiento por defecto solo si es necesario
+                if (this.type !== 'submit') {
+                    e.preventDefault();
+                }
+                
+                // Simular clic inmediato
+                this.click();
+            }, { passive: false });
+        });
+    }
 });

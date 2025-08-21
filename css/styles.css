@@ -922,3 +922,32 @@ img {
         margin-top: 8px;
     }
 }
+
+/* Mejoras para dispositivos táctiles */
+@media (max-width: 992px) {
+    /* Eliminar retrasos en animaciones para mejorar respuesta táctil */
+    .btn, .btn-primary, .btn-secondary, .btn-sm, .remove-vehiculo {
+        transition: none !important;
+        transform: none !important;
+        animation: none !important;
+    }
+    
+    /* Aumentar área táctil para botones pequeños */
+    .btn-sm, .remove-vehiculo {
+        min-height: 44px;
+        min-width: 44px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    
+    /* Eliminar efectos hover que pueden causar retrasos */
+    .btn:hover, .btn-primary:hover, .btn-secondary:hover {
+        transform: none !important;
+    }
+    
+    /* Mejorar respuesta táctil */
+    * {
+        touch-action: manipulation;
+    }
+}
